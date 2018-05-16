@@ -17,8 +17,8 @@ namespace PedidosApi.Services
             _clienteRepository = clienteRepository;
         }
 
-        public void Salvar(Cliente cliente) {
-            _clienteRepository.Salvar(cliente);
+        public Cliente Salvar(Cliente cliente) {
+            return _clienteRepository.Salvar(cliente);
         }
 
         public void Editar(Guid Id,Cliente cliente)

@@ -16,6 +16,7 @@ namespace PedidosApi.Mappings
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(p => p.Nome);
             builder.Property(p => p.Email);
+            builder.Property(p => p.Foto);
             builder.Property(p => p.AssinaturaAlteracao);
         }
     }

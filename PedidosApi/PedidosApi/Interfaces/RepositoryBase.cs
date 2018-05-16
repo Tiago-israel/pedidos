@@ -8,7 +8,7 @@ namespace PedidosApi.Interfaces
 {
     public interface RepositoryBase<T> where T : Modelo 
     {
-         void Salvar(T entity);
+         T Salvar(T entity);
          void Editar(Guid id, T entity);
          void Excluir(Guid id);
          IEnumerable<T> BuscarTodos();

@@ -42,10 +42,18 @@ namespace PedidosApi.Repository
             }
         }
 
-        public  void Salvar(Cliente entity)
+        public  Cliente Salvar(Cliente entity)
         {
-            _dataContext.Clientes.Add(entity);
-            _dataContext.SaveChanges();
+            try
+            {
+                _dataContext.Clientes.Add(entity);
+                _dataContext.SaveChanges();
+                return entity;
+            }
+            catch (Exception e) {
+                throw new Exception();
+            }
+           
         }
     }
 }

@@ -10,7 +10,7 @@ namespace PedidosApi.Interfaces.Services
     {
         Cliente BuscarPorId(Guid Id);
         IEnumerable<Cliente> BuscarTodos();
-        void Salvar(Cliente cliente);
+        Cliente Salvar(Cliente cliente);
         void Editar(Guid Id, Cliente cliente);
         void Excluir(Guid Id);
     }
