@@ -15,7 +15,7 @@ namespace PedidosApi.Mappings
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(p => p.Data);
             builder.Property(p => p.Numero);
-            builder.HasOne(p => p.Cliente).WithMany(p => p.Pedidos).HasForeignKey(p => p.IdCliente);
+            builder.HasOne(p => p.Cliente).WithMany(p => p.Pedidos).HasForeignKey(p => p.IdCliente).HasConstraintName("IdCliente");
         }
     }
 }

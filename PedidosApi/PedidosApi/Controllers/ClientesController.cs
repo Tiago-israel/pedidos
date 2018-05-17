@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,6 +12,7 @@ using PedidosApi.Interfaces;
 using PedidosApi.Interfaces.Services;
 using PedidosApi.Models;
 using PedidosApi.Repository;
+using PedidosApi.ViewModel;
 
 namespace PedidosApi.Controllers
 {
@@ -20,23 +22,31 @@ namespace PedidosApi.Controllers
     {
         private readonly IHostingEnvironment _environment;
         private readonly IClienteService _clienteService;
+        //private readonly IMapper _mapper;
 
         public ClientesController(IClienteService clienteService, IHostingEnvironment environment)
         {
             _environment = environment;
             _clienteService = clienteService;
+            //_mapper = mapper;
         }
 
         [HttpGet("{id}")]
         public IActionResult buscarPorId(Guid Id)
         {
             var cliente = _clienteService.BuscarPorId(Id);
+           // var clienteViewModel = _mapper.Map<Cliente,ClienteViewModel>(cliente);
             return Ok(cliente);
         }
 
         [HttpGet()]
         public IActionResult buscarTodos() {
-            var clientes = _clienteService.BuscarTodos();
+            var clientes = _clienteService.BuscarTodos().ToList();
+            clientes.ForEach(x =>
+            {
+                x.File = this.retornarImagem(x.Foto);
+            });
+
             return Ok(clientes);
         }
 
@@ -111,5 +121,28 @@ namespace PedidosApi.Controllers
             };
         }
 
+
+        public String retornarImagem(string caminhoImagem) {
+            var path = _environment.WebRootPath + "\\uploads\\" + caminhoImagem;
+            byte[] imageBytes = System.IO.File.ReadAllBytes(path);
+            string base64String = Convert.ToBase64String(imageBytes);
+            return base64String;
+        }
+
+        public FileStreamResult BuscarImagem(String fileName)
+        {
+            if (fileName.Trim() != null)
+            {
+                var caminho = Path.Combine(_environment.WebRootPath + "\\uploads\\", fileName);
+                var memory = new MemoryStream();
+                using (var stream = new FileStream(caminho, FileMode.Open))
+                {
+                    stream.CopyTo(memory);
+                }
+                memory.Position = 0;
+                return File(memory, GetContentType(caminho), Path.GetFileName(caminho));
+            }
+            return null;
+        }
     }
 }

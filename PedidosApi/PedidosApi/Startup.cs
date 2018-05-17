@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PedidosApi.Interfaces;
 using PedidosApi.Interfaces.Services;
+using PedidosApi.Mapper;
 using PedidosApi.Models;
 using PedidosApi.Repository;
 using PedidosApi.Services;
@@ -40,7 +42,8 @@ namespace PedidosApi
             
             //Liberando acesso de outra aplicação
             services.AddCors();
-
+            //
+            //services.AddAutoMapper(x => x.AddProfile(new ModeloParaViewModel()));
             services.AddMvc();
         }
 

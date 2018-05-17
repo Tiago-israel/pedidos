@@ -23,8 +23,8 @@ namespace PedidosApi.Models
         {
             modelBuilder.ApplyConfiguration(new ClienteMap());
             modelBuilder.ApplyConfiguration(new PedidoMap());
-            modelBuilder.Entity<Pedido>().HasOne<Cliente>(p => p.Cliente).WithMany(c => c.Pedidos).HasForeignKey(p => p.IdCliente).HasConstraintName("IdCliente");
-            modelBuilder.Entity<Cliente>().HasMany<Pedido>(c => c.Pedidos).WithOne(p => p.Cliente).HasForeignKey("IdCliente");
+            //modelBuilder.Entity<Pedido>().HasOne<Cliente>(p => p.Cliente).WithMany(c => c.Pedidos).HasForeignKey(p => p.IdCliente).HasConstraintName("IdCliente");
+            //modelBuilder.Entity<Cliente>().HasMany<Pedido>(c => c.Pedidos).WithOne(p => p.Cliente).HasForeignKey("IdCliente");
         }
     }
 }

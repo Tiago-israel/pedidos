@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,7 +13,9 @@ namespace PedidosApi.Models
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Foto { get; set; }
-        
+
+        public string File { get; set; }
+
         public virtual ICollection<Pedido> Pedidos { get; set; }
     }
 }

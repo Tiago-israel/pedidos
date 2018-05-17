@@ -18,6 +18,8 @@ namespace PedidosApi.Mappings
             builder.Property(p => p.Email);
             builder.Property(p => p.Foto);
             builder.Property(p => p.AssinaturaAlteracao);
+            builder.Ignore(p => p.File);
+            builder.HasMany<Pedido>(c => c.Pedidos).WithOne(p => p.Cliente).HasForeignKey("IdCliente");
         }
     }
 }
