@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PedidosApi.Interfaces;
+using PedidosApi.Interfaces.Repository;
 using PedidosApi.Interfaces.Services;
 using PedidosApi.Mapper;
 using PedidosApi.Models;
@@ -36,10 +37,12 @@ namespace PedidosApi
 
             //Repositories
             services.AddTransient<IClienteRepository, ClienteRepository>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
 
             //Services
             services.AddTransient<IClienteService, ClienteService>();
-            
+            services.AddTransient<IProdutoService, ProdutoService>();
+
             //Liberando acesso de outra aplicação
             services.AddCors();
             //

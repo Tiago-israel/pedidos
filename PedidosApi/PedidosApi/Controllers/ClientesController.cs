@@ -35,7 +35,7 @@ namespace PedidosApi.Controllers
         public IActionResult buscarPorId(Guid Id)
         {
             var cliente = _clienteService.BuscarPorId(Id);
-           // var clienteViewModel = _mapper.Map<Cliente,ClienteViewModel>(cliente);
+            cliente.File = this.retornarImagem(cliente.Foto);
             return Ok(cliente);
         }
 
@@ -74,9 +74,13 @@ namespace PedidosApi.Controllers
         [Route("upload/{id}")]
         public IActionResult UploadFoto(IFormFile file, Guid id)
         {
-            var uploads = Path.Combine(_environment.WebRootPath, "uploads");
+            var uploads = Path.Combine(_environment.WebRootPath, "uploads\\"+id);
             if (file.Length > 0)
             {
+                if (!Directory.Exists(uploads + "\\" + id))
+                {
+                    Directory.CreateDirectory(uploads + "\\" + id);
+                }
                 using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
                 {
                     file.CopyTo(fileStream);

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PedidosApi.Interfaces.Services
 {
-    public interface IClienteService : IBaseService<Cliente>
+    public interface IProdutoService : IBaseService<Produto>
     {
-       
+        
     }
 }
